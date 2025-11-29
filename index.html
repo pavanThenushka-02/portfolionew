@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavan Thenushka - Mechanical Engineering Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS with your Public Key
+            emailjs.init({
+                publicKey: "PtQBxEQTSm8GlA_d7", 
+            });
+        })();
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enables class-based dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0B0C10',
+                        darkCard: '#111827',
+                        darkInput: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        .section-padding {
+            padding: 5rem 1rem;
+        }
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 6rem 1.5rem;
+            }
+        }
+        /* Hero background */
+        .intro-background {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 0;
+        }
+        /* Dark Mode Overlay (Default) */
+        html.dark .intro-background {
+            background-image: linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.92)), url('image_66d01b.png');
+            color: white;
+        }
+        /* Light Mode Overlay */
+        html:not(.dark) .intro-background {
+            background-image: linear-gradient(rgba(249, 250, 251, 0.90), rgba(249, 250, 251, 0.95)), url('image_66d01b.png');
+            color: #111827;
+        }
+
+        /* Profile Photo Animation */
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+
+        .profile-photo {
+            border: 4px solid rgba(59, 130, 246, 1);
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            object-position: top;
+            animation: pulse-border 2s infinite; /* Applied Animation */
+        }
+        
+        .department-logo {
+            max-height: 80px;
+            width: auto;
+            opacity: 0.9;
+            transition: filter 0.3s;
+        }
+        /* Invert logo in light mode to make it visible if it was designed for dark, 
+           or keep as is if it's colored. Assuming white logo for dark mode: */
+        html.dark .department-logo { filter: brightness(0) invert(1); }
+        html:not(.dark) .department-logo { filter: none; }
+
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .skill-pill {
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+        }
+        /* Dark Mode Pill */
+        html.dark .skill-pill {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #e5e7eb;
+        }
+        html.dark .skill-pill:hover {
+            border-color: #3b82f6;
+            background-color: #262f3e;
+        }
+        /* Light Mode Pill */
+        html:not(.dark) .skill-pill {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            color: #374151;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        html:not(.dark) .skill-pill:hover {
+            border-color: #3b82f6;
+            background-color: #f3f4f6;
+        }
+
+        .org-card {
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        html.dark .org-card {
+            background-color: #111827;
+            border: 1px solid #374151;
+        }
+        html:not(.dark) .org-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-title-underline {
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #3b82f6;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Form Styles */
+        .form-input {
+            transition: border-color 0.3s, ring 0.3s, background-color 0.3s, color 0.3s;
+        }
+        html.dark .form-input {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+        }
+        html:not(.dark) .form-input {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #111827;
+        }
+        .form-input:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Chat Styles */
+        #chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #2563eb;
+            color: white;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.5);
+            cursor: pointer;
+            transition: transform 0.2s ease-out, background-color 0.2s;
+            z-index: 1000;
+        }
+        #chat-bubble:hover { transform: scale(1.1); background-color: #1d4ed8; }
+        #chat-modal { transition: opacity 0.3s ease-out; }
+        #chat-dialog { transition: transform 0.3s ease-out, opacity 0.3s ease-out; max-height: 80vh; }
+        #chat-history { height: 350px; overflow-y: auto; scrollbar-width: thin; }
+        
+        /* Chat Colors based on Theme */
+        html.dark #chat-history, html.dark .chat-ai { background-color: #374151; color: #e5e7eb; }
+        html:not(.dark) #chat-history { background-color: #f3f4f6; }
+        html:not(.dark) .chat-ai { background-color: #e5e7eb; color: #1f2937; }
+        
+        .chat-message { max-width: 85%; padding: 0.75rem 1rem; border-radius: 1rem; line-height: 1.5; margin-bottom: 0.75rem; font-size: 0.95rem; }
+        .chat-user { background-color: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 0.25rem; }
+        .chat-ai { align-self: flex-start; border-bottom-left-radius: 0.25rem; }
+        
+        .typing-indicator span { height: 8px; width: 8px; margin: 0 2px; background-color: #9ca3af; border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite both; }
+        .typing-indicator span:nth-child(1) { animation-delay: 0.0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-[#0B0C10] selection:bg-blue-500 selection:text-white text-gray-900 dark:text-gray-200">
+
+    <!-- Header Navigation -->
+    <nav class="bg-white/90 dark:bg-[#0B0C10]/95 shadow-lg border-b border-gray-200 dark:border-gray-800 p-4 sticky top-0 z-50 backdrop-blur-md transition-colors duration-300" data-aos="fade-down">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-500 tracking-tight">Pavan Thenushka</a>
+            
+            <div class="flex items-center gap-6">
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="#about" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">About</a>
+                    <a href="#experience" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Experience</a>
+                    <a href="#education" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Education</a>
+                    <a href="#projects" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Projects</a>
+                    <a href="#skills" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Skills</a>
+                    <a href="#volunteering" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Volunteering</a>
+                    <a href="#contact" class="text-gray-700 dark:text-gray-300 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm uppercase tracking-wide">Contact</a>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon (shown in dark mode) -->
+                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
+                    <!-- Moon Icon (shown in light mode) -->
+                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden text-gray-700 dark:text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Intro Hero Section -->
+    <section class="intro-background text-center py-24 md:py-36 flex flex-col justify-center items-center min-h-[85vh]">
+        <div class="container mx-auto px-4 relative z-10 flex flex-col items-center">
+            <img src="unnamed.png" alt="Pavan Thenushka" class="profile-photo rounded-full mb-8"
+                 onerror="this.onerror=null;this.src='https://placehold.co/220x220/1f2937/e2e8f0?text=Pavan';" data-aos="zoom-in">
+            
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight" data-aos="fade-up" data-aos-delay="200">H.K. Pavan Thenushka</h1>
+            <p class="text-lg md:text-2xl font-light mb-8 opacity-90 max-w-2xl" data-aos="fade-up" data-aos-delay="400">Undergraduate Mechanical Engineer | Innovator | Problem Solver</p>
+            
+            <img src="image_84c03c.png" alt="Department Logo" class="department-logo mb-10"
+                 onerror="this.style.display='none'" data-aos="fade-up" data-aos-delay="600">
+
+            <div class="flex gap-4" data-aos="fade-up" data-aos-delay="800">
+                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105">View Projects</a>
+                <a href="Pavan Thenushka.pdf" download class="bg-transparent border-2 border-current hover:bg-white hover:text-black dark:hover:text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="section-padding bg-gray-50 dark:bg-[#0B0C10] border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 max-w-4xl" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">About Me</h2>
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-colors">
+                <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                    I am an undergraduate Mechanical Engineering student at the University of Moratuwa, passionate about applying core engineering principles to solve real-world problems. My academic journey has equipped me with a strong foundation in design, manufacturing, thermodynamics, and automation.
+                </p>
+                <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    I thrive in collaborative environments and enjoy tackling complex challenges through innovation. Whether it's independent research or team-based design projects, I am eager to gain hands-on experience and contribute to impactful engineering solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding bg-white dark:bg-[#0B0C10] transition-colors">
+        <div class="container mx-auto px-4 max-w-4xl" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Experience</h2>
+            
+            <div class="space-y-8">
+                <!-- Internship -->
+                <div class="relative pl-8 border-l-2 border-blue-500" data-aos="fade-left">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Intern</h3>
+                    <h4 class="text-xl text-blue-600 dark:text-blue-400 font-medium">Alumex PLC</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Nov 24, 2025 – Present</p>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Currently engaging in industrial training, gaining hands-on experience in manufacturing processes, operations, and engineering applications within a leading aluminium extrusion company.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section-padding bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white" data-aos="fade-up">Education</h2>
+            
+            <div class="grid gap-6 md:grid-cols-2">
+                <!-- Edu Item 1 -->
+                <div class="bg-white dark:bg-[#0B0C10] p-6 rounded-xl shadow-md border-t-4 border-blue-500 h-full border-x border-b border-gray-200 dark:border-gray-800 transition-colors" data-aos="fade-right">
+                    <div class="mb-2">
+                        <span class="text-xs uppercase tracking-wider text-gray-500 font-semibold">University</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">University of Moratuwa</h3>
+                    <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">BSc Honors in Mechanical Engineering</p>
+                    <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                        <span class="bg-gray-100 dark:bg-gray-900 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">CGPA: 3.34 / 4.00</span>
+                    </div>
+                </div>
+
+                <!-- Edu Item 2 -->
+                <div class="bg-white dark:bg-[#0B0C10] p-6 rounded-xl shadow-md border-t-4 border-gray-500 dark:border-gray-600 h-full border-x border-b border-gray-200 dark:border-gray-800 transition-colors" data-aos="fade-left">
+                    <div class="mb-2">
+                        <span class="text-xs uppercase tracking-wider text-gray-500 font-semibold">High School</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">St. Thomas Boys' College</h3>
+                    <p class="text-gray-600 dark:text-gray-400 font-medium mb-4">GCE Advanced Level - Physical Science</p>
+                    <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                        <span class="bg-gray-100 dark:bg-gray-900 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Z-Score: 2.0921</span>
+                        <span class="ml-2 text-gray-500">(2021)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding bg-gray-100 dark:bg-[#0B0C10] border-t border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900 dark:text-white" data-aos="fade-up">All Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Project 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_mirror.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Motorbike+Mirror';" alt="Motorbike Mirror" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4 text-blue-600 dark:text-blue-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16"><path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Reverse Eng. Motorbike Side Mirror</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            Performed material tests and designed mirror glass using SolidWorks, analyzing stress and displacement. Explored manufacturing process to enhance performance.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-blue-600 dark:text-blue-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">SolidWorks</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-blue-600 dark:text-blue-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Analysis</span>
+                        </div>
+                        <a href="https://www.linkedin.com/posts/pavan-thenushka-657278357_reverseengineering-mechanicalengineering-activity-7351091421510029312-DT6W" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_gearbox.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Brick+Press+Gearbox';" alt="Manual Brick Press Gearbox" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                         <div class="mb-4 text-green-600 dark:text-green-400">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-gear-wide-connected" viewBox="0 0 16 16"><path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1.001A4.998 4.998 0 0 0 5.416 3.721L8.25 7.5h4.723zM6.25 8a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Manual Brick Press Gearbox</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            (Ongoing) Designing a gearbox to enhance efficiency and durability. Developing 3D models in SolidEdge and optimizing torque transmission.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-green-600 dark:text-green-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">SolidEdge</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-green-600 dark:text-green-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Gear Design</span>
+                        </div>
+                        <a href="#" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_table.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Kitchen+Table';" alt="Multi-Tasking Kitchen Table" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4 text-orange-500 dark:text-orange-400">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16"><path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.619 3.197-.242a.5.5 0 0 0 .226-.03l.155-.102a.5.5 0 0 0 .16-.556l-.375-1.168-1.784.582.375 1.168zm-5.749 2.76 1.488 1.488-.708.709-1.488-1.489.708-.708zm1.066-2.522 1.489 1.489-.709.708-1.489-1.489.709-.708z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Multi-Tasking Kitchen Table</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            Designed and fabricated a versatile kitchen table with cutting surface, equipment hangers, and barbecue section using woodworking, welding, and sheet metal techniques.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-orange-600 dark:text-orange-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Fabrication</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-orange-600 dark:text-orange-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Welding</span>
+                        </div>
+                        <a href="https://www.linkedin.com/posts/activity-7307827435398381568-FBXI" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="400">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_rice.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Rice+Packing+Machine';" alt="Automated Rice Packing" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4 text-purple-600 dark:text-purple-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16"><path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z"/><path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0 1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0 1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 4.5 4h7A3.5 3.5 0 0 1 14 7.5Z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Automated Rice Packing</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            Developed a mechatronic system for automated rice dispensing/packing. Integrated IR sensors, screw agitators, and GSM for alerts.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-purple-600 dark:text-purple-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Arduino</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-purple-600 dark:text-purple-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Sensors</span>
+                        </div>
+                        <a href="https://www.linkedin.com/posts/pavan-thenushka-657278357_mechatronics-automation-arduino-activity-7309648321994706944-GRSX" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="500">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_tea.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Tea+Factory+Optimization';" alt="Process Optimization: Tea Factory" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4 text-red-600 dark:text-red-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Process Optimization: Tea Factory</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            (Ongoing) Analyzing tea production for inefficiencies. Proposing automated packaging, real-time moisture control, and improved worker safety.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-red-600 dark:text-red-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Lean Mfg</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-red-600 dark:text-red-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">Optimization</span>
+                        </div>
+                        <a href="#" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                 <!-- Project 6 -->
+                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden card border border-gray-200 dark:border-gray-700 flex flex-col h-full" data-aos="fade-up" data-aos-delay="600">
+                    <!-- Project Image -->
+                    <div class="h-48 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img src="project_medibox.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Smart+Medibox';" alt="Smart Medibox" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4 text-teal-600 dark:text-teal-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16"><path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Smart Medibox</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm flex-1">
+                            Built an ESP32-based medication management system with environmental monitoring, automated shading, and Node-RED visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-teal-600 dark:text-teal-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">ESP32</span>
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-teal-600 dark:text-teal-300 text-xs font-semibold rounded border border-gray-300 dark:border-gray-700">IoT</span>
+                        </div>
+                        <a href="https://wokwi.com/projects/431183965622990849" target="_blank" class="text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-white border border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-600 font-medium py-2 px-4 rounded text-center transition-colors text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            View on Wokwi
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-gray-50 dark:bg-[#0B0C10] border-t border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-900 dark:text-white" data-aos="fade-up">Skills</h2>
+            <span class="section-title-underline mb-12"></span>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Left Column: Technical Skills -->
+                <div data-aos="fade-right">
+                    <h3 class="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
+                        <svg class="w-6 h-6 text-blue-600 dark:text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        Technical Skills
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">AutoCAD</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">SOLIDWORKS</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">SolidEdge</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Arduino</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">PLC Programming</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">MATLAB</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Basic FEA (ANSYS)</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CFD</span>
+                        </div>
+                        <div class="skill-pill">
+                            <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg></span>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">3D Printing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Soft Skills & Languages -->
+                <div data-aos="fade-left">
+                    <!-- Soft Skills -->
+                    <div class="mb-10">
+                        <h3 class="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
+                            <svg class="w-6 h-6 text-blue-600 dark:text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Soft Skills
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="skill-pill">
+                                <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg></span>
+                                <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Problem-solving</span>
+                            </div>
+                            <div class="skill-pill">
+                                <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></span>
+                                <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Teamwork & Collaboration</span>
+                            </div>
+                            <div class="skill-pill">
+                                <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
+                                <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Project Management</span>
+                            </div>
+                            <div class="skill-pill">
+                                <span class="text-blue-500 dark:text-blue-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
+                                <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Time Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Languages</h3>
+                        <div class="space-y-6 bg-white dark:bg-[#111827] p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm transition-colors">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">English</span>
+                                    <span class="text-gray-500 text-sm">Fluent</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300 font-medium">Sinhala</span>
+                                    <span class="text-gray-500 text-sm">Native</span>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Organizations & Volunteering Section (Redesigned) -->
+    <section id="volunteering" class="section-padding bg-white dark:bg-[#0B0C10] border-t border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-900 dark:text-white" data-aos="fade-up">Organizations & Volunteering</h2>
+            <span class="section-title-underline mb-12"></span>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Left Column: Professional Memberships -->
+                <div data-aos="fade-right">
+                    <h3 class="flex items-center text-xl font-bold text-blue-600 dark:text-blue-400 mb-6">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                        Professional Memberships
+                    </h3>
+                    
+                    <div class="org-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">Institution of Mechanical Engineers (IMechE)</h4>
+                            <span class="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded">Affiliate Member</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Jan 2025 - Present
+                        </div>
+                        <p class="text-gray-500 text-sm">Member No: 80788035</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">Institution of Engineers, Sri Lanka (IESL)</h4>
+                            <span class="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded">Student Chapter Member</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Sep 2025 - Present
+                        </div>
+                        <p class="text-gray-500 text-sm">Member No: S-33267</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Volunteering Experience -->
+                <div data-aos="fade-left">
+                    <h3 class="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
+                        <svg class="w-5 h-5 mr-2 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        Volunteering Experience
+                    </h3>
+
+                    <div class="org-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">Esports Club - University of Moratuwa</h4>
+                            <span class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-1 rounded">Member</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Jan 2024 - Present
+                        </div>
+                        <p class="text-gray-500 text-sm">Active member organizing events and activities</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">IEEE Power Electronics Society Student Branch Chapter</h4>
+                            <span class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-1 rounded">Design Committee Member</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Jan 2024 - Dec 2025
+                        </div>
+                        <p class="text-gray-500 text-sm">Participated in sessions and carried out design works</p>
+                    </div>
+
+                    <div class="org-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">IEEE Robotics and Automation Society</h4>
+                            <span class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-1 rounded">Design Committee Member</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Jan 2024 - Dec 2024
+                        </div>
+                        <p class="text-gray-500 text-sm">Participated in workshops and sessions, and carried out design work</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-gray-50 dark:bg-[#0B0C10] border-t border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-900 dark:text-white" data-aos="fade-up">Let's Connect</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="flex flex-col justify-center space-y-6" data-aos="fade-right">
+                     <p class="text-lg text-gray-700 dark:text-gray-300">
+                        I'm currently open to collaborative projects and engineering opportunities. Reach out via email, phone, or LinkedIn.
+                    </p>
+                    
+                    <a href="mailto:pavanthenushka2002@gmail.com" class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-900 rounded-xl hover:bg-gray-50 dark:hover:bg-black transition-colors border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="bg-blue-600 p-3 rounded-full text-white">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <span class="block text-sm text-gray-500 dark:text-gray-400">Email</span>
+                            <span class="text-gray-900 dark:text-white font-medium">pavanthenushka2002@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <div class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="bg-green-600 p-3 rounded-full text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        </div>
+                        <div>
+                            <span class="block text-sm text-gray-500 dark:text-gray-400">Phone</span>
+                            <span class="text-gray-900 dark:text-white font-medium">+94 71 338 2118</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.linkedin.com/in/pavan-thenushka-657278357" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-900 rounded-xl hover:bg-gray-50 dark:hover:bg-black transition-colors border border-gray-200 dark:border-gray-800 shadow-sm">
+                        <div class="bg-blue-700 p-3 rounded-full text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                        </div>
+                         <div>
+                            <span class="block text-sm text-gray-500 dark:text-gray-400">LinkedIn</span>
+                            <span class="text-gray-900 dark:text-white font-medium">Pavan Thenushka</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-colors" data-aos="fade-left">
+                    <form class="space-y-4" onsubmit="event.preventDefault(); sendEmail();">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Name</label>
+                            <input type="text" id="from_name" class="w-full form-input rounded-lg px-4 py-3" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
+                            <input type="email" id="from_email" class="w-full form-input rounded-lg px-4 py-3" placeholder="your@email.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Message</label>
+                            <textarea id="message" class="w-full form-input rounded-lg px-4 py-3 h-32" placeholder="How can we collaborate?" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-[#0B0C10] border-t border-gray-200 dark:border-gray-800 pt-12 pb-8 transition-colors">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Pavan Thenushka</h3>
+                    <p class="text-gray-500 text-sm">Mechanical Engineer | Problem Solver</p>
+                </div>
+                
+                <div class="flex space-x-6 text-sm">
+                    <a href="#about" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">About</a>
+                    <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Contact</a>
+                    <a href="Pavan Thenushka.pdf" download class="text-blue-600 dark:text-blue-500 hover:text-blue-800 dark:hover:text-blue-400 transition-colors">Download CV</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-800 pt-8 text-center text-gray-500 dark:text-gray-600 text-sm">
+                <p>&copy; 2025 H.K. Pavan Thenushka. All rights reserved.</p>
+                <p class="mt-2">Matara, Southern Province, Sri Lanka</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- --- ✨ Gemini Chat Feature --- -->
+    <button id="chat-bubble" title="✨ Ask me anything about Pavan!">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
+            <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/>
+        </svg>
+    </button>
+
+    <div id="chat-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-end sm:items-center justify-center p-4 hidden z-[1001] transition-opacity duration-300 backdrop-blur-sm" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl shadow-2xl w-full max-w-lg p-0 border border-gray-200 dark:border-gray-700 relative transform transition-all scale-95 opacity-0 flex flex-col overflow-hidden" id="chat-dialog">
+            <div class="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-600 p-2 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Assistant</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Powered by Gemini AI</p>
+                    </div>
+                </div>
+                <button id="chat-close-btn" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Close modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>
+                </button>
+            </div>
+            <div id="chat-history" class="p-4 transition-colors">
+                <div class="chat-message chat-ai">
+                    Hello! I'm Pavan's AI portfolio assistant. Ask me anything about his projects, skills, or engineering experience!
+                </div>
+            </div>
+            <div id="typing-indicator" class="typing-indicator hidden px-6 py-2 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-xs">
+                <span></span><span></span><span></span> AI is thinking...
+            </div>
+            <form id="chat-form" class="p-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500" placeholder="Type your question..." required autocomplete="off">
+                <button id="chat-send-btn" type="submit" class="bg-blue-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AOS Library Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // --- Chat & Other Scripts ---
+        const chatBubble = document.getElementById('chat-bubble');
+        const chatModal = document.getElementById('chat-modal');
+        const chatDialog = document.getElementById('chat-dialog');
+        const chatCloseBtn = document.getElementById('chat-close-btn');
+        const chatHistory = document.getElementById('chat-history');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const apiKey = "AIzaSyDdeQWUcmhBBavcKsxKVwUO_cNwk5wh9jA"; 
+
+        function showChatModal() {
+            chatModal.classList.remove('hidden');
+            setTimeout(() => {
+                chatModal.classList.add('opacity-100');
+                chatDialog.classList.remove('scale-95', 'opacity-0');
+                chatDialog.classList.add('scale-100', 'opacity-100');
+                if(window.innerWidth > 640) chatInput.focus();
+            }, 10);
+        }
+
+        function hideChatModal() {
+            chatDialog.classList.add('scale-95', 'opacity-0');
+            chatModal.classList.remove('opacity-100');
+            setTimeout(() => {
+                chatModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function appendMessage(message, sender) {
+            const messageEl = document.createElement('div');
+            messageEl.className = `chat-message ${sender === 'user' ? 'chat-user' : 'chat-ai'}`;
+            messageEl.innerHTML = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>'); 
+            chatHistory.appendChild(messageEl);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function showTyping() { typingIndicator.classList.remove('hidden'); }
+        function hideTyping() { typingIndicator.classList.add('hidden'); }
+
+        chatBubble.addEventListener('click', showChatModal);
+        chatCloseBtn.addEventListener('click', hideChatModal);
+        chatModal.addEventListener('click', (e) => {
+            if (e.target === chatModal) hideChatModal();
+        });
+
+        const portfolioContext = `
+            You are an AI assistant for H.K. Pavan Thenushka.
+            BACKGROUND: Undergraduate Mechanical Engineering student at University of Moratuwa.
+            CONTACT: pavanthenushka2002@gmail.com, +94 71 338 2118, Matara, Sri Lanka.
+            EDUCATION: 
+            1. BSc Hons Mechanical Engineering, UoM (CGPA 3.34/4.00).
+            2. St. Thomas Boys' College (A/L Physical Science, Z-Score 2.0921).
+            SKILLS: SolidWorks, MATLAB, CFD, Wokwi, 3D Printing, Reverse Engineering, FEA.
+            PROJECTS:
+            1. Motorbike Side Mirror Reverse Engineering: Used SolidWorks & FEA for stress analysis.
+            2. Brick Press Gearbox Design: Designing for efficiency and durability (Ongoing).
+            3. Multi-Tasking Kitchen Table: Welding & Fabrication.
+            4. Automated Rice Packing: Arduino, Sensors, GSM.
+            5. Tea Factory Process Optimization: Lean Mfg & Safety (Ongoing).
+            6. Smart Medibox: ESP32, IoT.
+            EXPERIENCE: 
+            - Intern at Alumex PLC (Nov 2025 - Present).
+            - Design Committee Member at IEEE Power Electronics & Robotics Societies.
+            AFFILIATIONS: IMechE Affiliate (80788035), IESL Student Member (S-33267).
+            TONE: Professional, enthusiastic, concise.
+        `;
+        
+        const systemPrompt = `You are a helpful AI assistant for Pavan's portfolio. Answer questions using ONLY this context: ${portfolioContext}. If you don't know, say "I don't have that info, but you can email Pavan!"`;
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userQuery = chatInput.value.trim();
+            if (!userQuery) return;
+
+            appendMessage(userQuery, 'user');
+            chatInput.value = '';
+            showTyping();
+            chatSendBtn.disabled = true;
+
+            try {
+                if (!apiKey) {
+                    throw new Error("API Key missing");
+                }
+                
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                
+                if (result.error) throw new Error(result.error.message);
+
+                const aiResponse = result.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response.";
+                appendMessage(aiResponse, 'ai');
+
+            } catch (error) {
+                console.error("AI Error:", error);
+                let errorMsg = "I'm having trouble connecting right now.";
+                if (error.message === "API Key missing") {
+                    errorMsg = "The AI feature needs an API Key to work. Please ask Pavan to add one in the code!";
+                }
+                appendMessage(errorMsg, 'ai');
+            } finally {
+                hideTyping();
+                chatSendBtn.disabled = false;
+                if(window.innerWidth > 640) chatInput.focus();
+            }
+        });
+
+        // EmailJS Integration
+        function sendEmail() {
+            // Note: In a real app, you would replace these with your actual Service ID and Template ID.
+            // For now, we simulate success so the user sees feedback.
+            const btn = document.querySelector('form button');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            emailjs.send("service_z50hpbd", "template_lgmi9cn", {
+                from_name: document.getElementById('from_name').value,
+                from_email: document.getElementById('from_email').value,
+                message: document.getElementById('message').value,
+            }).then(
+                function(response) {
+                    alert('Message sent successfully!');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    document.querySelector('form').reset();
+                },
+                function(error) {
+                    alert('Failed to send message. Please try again later.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    console.log('FAILED...', error);
+                }
+            );
+        }
+    </script>
+</body>
+</html>
